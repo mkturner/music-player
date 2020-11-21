@@ -37,7 +37,7 @@ body {
   width: 100%;
   object-fit: cover;
   border-radius: 20px;
-  box-shadow: 0 5px 30px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 30px 5px rgba(0, 0, 0, 0.5);
 }
 
 h2 {
@@ -53,8 +53,8 @@ h3 {
   margin: 5px 0 0;
 }
 
-/* Progress */
-.progress-container {
+/* Progress Bar */
+.progress-bar-container {
   background: #fff;
   border-radius: 5px;
   cursor: pointer;
@@ -63,7 +63,7 @@ h3 {
   width: 90%;
 }
 
-.progress {
+.progress-bar {
   background: #242323;
   border-radius: 5px;
   height: 100%;
