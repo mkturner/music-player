@@ -10,7 +10,7 @@ let isPlaying = false;
 // Play music
 function playSong() {
   // set isPlaying to true
-  isPLaying = true;
+  isPlaying = true;
   // Change icon & title to pause
   playBtn.classList.replace('fa-play', 'fa-pause');
   playBtn.setAttribute('title', 'Pause');
@@ -22,7 +22,6 @@ function pauseSong() {
   // set isPLaying to false
   isPlaying = false;
   // Change icon & title back to play
-  // Change icon & title to pause
   playBtn.classList.replace('fa-pause', 'fa-play');
   playBtn.setAttribute('title', 'Play');
   music.pause();
