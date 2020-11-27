@@ -1,8 +1,38 @@
 // Grab elements from page
+const image = document.querySelector('img');
+const title = document.getElementById('title');
+const artist = document.getElementById('artist');
 const music = document.querySelector('audio');
 const prevBtn = document.getElementById('prev');
 const playBtn = document.getElementById('play');
-const nextBtn = document.getElementById('next');
+const nextBtn = document.getElementById('next'); 
+
+// Music
+const songs = [
+    {
+        name: 'demo-1',
+        displayName: 'Electric Chill Machine',
+        artist: 'Jacinto',
+    },
+    {
+        name: 'demo-2',
+        displayName: 'Seven Nation Army (Remix)',
+        artist: 'Jacinto',
+    },
+    {
+        name: 'demo-3',
+        displayName: 'Goodnight Disco Queen',
+        artist: 'Jacinto',
+    },
+    {
+        name: 'demo-4',
+        displayName: 'Front Row (Remix)',
+        artist: 'Metric ft. Jacinto',
+    },
+]
+
+// what song is currently playing
+let songIndex = 0;
 
 // Check if playing
 let isPlaying = false;
@@ -27,5 +57,37 @@ function pauseSong() {
   music.pause();
 }
 
-//  Play / Pause event listener
+//  'Play / Pause' event listener
 playBtn.addEventListener('click', () => (isPlaying ? pauseSong() : playSong()));
+
+// 'Previous' event listener
+prevBtn.addEventListener('click', prevSong);
+
+// 'Next' event listener
+nextBtn.addEventListener('click', nextSong);
+
+// Next Song
+function nextSong() {
+    songIndex = songIndex == 3 ? 0 : ++songIndex;
+    loadSong(songs[songIndex])
+    console.log(songIndex);
+    playSong();
+}
+
+function prevSong() {
+    songIndex = songIndex == 0 ? 3 : --songIndex;
+    loadSong(songs[songIndex])
+    console.log(songIndex);
+    playSong();
+}
+
+// Update DOM on song change
+function loadSong(song) {
+    title.textContent = song.displayName;
+    image.src = `img/${song.name}.jpg`;
+    music.src = `music/${song.name}.mp3`;
+    artist.textContent = song.artist;
+}
+
+// On load - Queue first song
+loadSong(songs[0]);
