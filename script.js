@@ -3,6 +3,8 @@ const image = document.querySelector('img');
 const title = document.getElementById('title');
 const artist = document.getElementById('artist');
 const music = document.querySelector('audio');
+const progressBarContainer = document.getElementById('progress-bar-container');
+const progressBar = document.getElementById('progress-bar');
 const prevBtn = document.getElementById('prev');
 const playBtn = document.getElementById('play');
 const nextBtn = document.getElementById('next'); 
@@ -57,6 +59,17 @@ function pauseSong() {
   music.pause();
 }
 
+// Update Progress Bar & Time
+function updateProgressBar(e) {
+    const { duration, currentTime } = e.srcElement
+    // Use currentTime and duration properties to update progressBar
+    const showProgress = (part, whole) => {
+        // find percentage and pass as string to 'width' css property
+        progressBar.style.width = `${(part / whole) * 100}%`;
+    }
+    isPlaying ? showProgress(currentTime, duration) : console.log('no');
+}
+
 //  'Play / Pause' event listener
 playBtn.addEventListener('click', () => (isPlaying ? pauseSong() : playSong()));
 
@@ -65,6 +78,9 @@ prevBtn.addEventListener('click', prevSong);
 
 // 'Next' event listener
 nextBtn.addEventListener('click', nextSong);
+
+// Song time event listener
+music.addEventListener('timeupdate', updateProgressBar);
 
 // Next Song
 function nextSong() {
@@ -78,6 +94,7 @@ function nextSong() {
   playSong();
 }
 
+// Previous Song
 function prevSong() {
   /*
         Overflow protection, if on first song
