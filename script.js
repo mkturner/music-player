@@ -68,17 +68,25 @@ nextBtn.addEventListener('click', nextSong);
 
 // Next Song
 function nextSong() {
-    songIndex = songIndex == 3 ? 0 : ++songIndex;
-    loadSong(songs[songIndex])
-    console.log(songIndex);
-    playSong();
+  /*
+        Overflow protection, if on last song
+        nextSong will wrap back to first
+    */
+  songIndex = songIndex == 3 ? 0 : ++songIndex;
+  loadSong(songs[songIndex]);
+  console.log(`next to ${songIndex}`);
+  playSong();
 }
 
 function prevSong() {
-    songIndex = songIndex == 0 ? 3 : --songIndex;
-    loadSong(songs[songIndex])
-    console.log(songIndex);
-    playSong();
+  /*
+        Overflow protection, if on first song
+        nextSong will wrap back to last
+    */
+  songIndex = songIndex == 0 ? 3 : --songIndex;
+  loadSong(songs[songIndex]);
+  console.log(`back to ${songIndex}`);
+  playSong();
 }
 
 // Update DOM on song change
