@@ -5,6 +5,8 @@ const artist = document.getElementById('artist');
 const music = document.querySelector('audio');
 const progressBarContainer = document.getElementById('progress-bar-container');
 const progressBar = document.getElementById('progress-bar');
+const songPos = document.getElementById('current-time');
+const songLength = document.getElementById('duration');
 const prevBtn = document.getElementById('prev');
 const playBtn = document.getElementById('play');
 const nextBtn = document.getElementById('next'); 
@@ -61,13 +63,24 @@ function pauseSong() {
 
 // Update Progress Bar & Time
 function updateProgressBar(e) {
-    const { duration, currentTime } = e.srcElement
-    // Use currentTime and duration properties to update progressBar
-    const showProgress = (part, whole) => {
-        // find percentage and pass as string to 'width' css property
-        progressBar.style.width = `${(part / whole) * 100}%`;
-    }
-    isPlaying ? showProgress(currentTime, duration) : console.log('no');
+  const { duration, currentTime } = e.srcElement;
+  // Use currentTime and duration properties to update progressBar
+  const showProgress = (part, whole) => {
+    // find percentage and pass as string to 'width' css property
+    progressPercent = (part / whole) * 100;
+    progressBar.style.width = `${progressPercent}%`;
+  };
+  isPlaying ? showProgress(currentTime, duration) : console.log('no');
+  // update time elements
+  const durationMinutes = Math.floor(duration / 60);
+  let durationSecs = Math.floor(duration % 60);
+  if (durationSecs < 10) {
+    durationSecs = '0' + durationSecs;
+  }
+  // show song length in ui
+  if (durationSecs) {
+    songLength.textContent = `${durationMinutes}:${durationSecs}`;
+  }
 }
 
 //  'Play / Pause' event listener
