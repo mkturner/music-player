@@ -101,7 +101,8 @@ function nextSong() {
         Overflow protection, if on last song
         nextSong will wrap back to first
     */
-  songIndex = songIndex == 3 ? 0 : ++songIndex;
+  // CS algorithm to link last & first without harcoding values
+  songIndex = ++songIndex % songs.length;
   loadSong(songs[songIndex]);
   console.log(`next to ${songIndex}`);
   playSong();
@@ -113,7 +114,8 @@ function prevSong() {
         Overflow protection, if on first song
         nextSong will wrap back to last
     */
-  songIndex = songIndex == 0 ? 3 : --songIndex;
+  // CS algorithm to link last & first without harcoding values
+  songIndex = (--songIndex + songs.length) % songs.length;
   loadSong(songs[songIndex]);
   console.log(`back to ${songIndex}`);
   playSong();
