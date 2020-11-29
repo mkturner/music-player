@@ -81,6 +81,14 @@ function updateProgressBar(e) {
   if (durationSecs) {
     songLength.textContent = `${durationMinutes}:${durationSecs}`;
   }
+
+  // calculate current song position
+  const currentMinutes = Math.floor(currentTime / 60);
+  let currentSecs = Math.floor(currentTime % 60);
+  if (currentSecs < 10) {
+    currentSecs = '0' + currentSecs;
+  }
+  songPos.textContent = `${currentMinutes}:${currentSecs}`;
 }
 
 //  'Play / Pause' event listener
