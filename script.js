@@ -106,7 +106,7 @@ function setProgressBar(e) {
     const positionDecimal = clickX / width;
     const positionAbs = positionDecimal * duration
     // set time to clicked postion
-    music.currentTime = positionAbs
+    music.currentTime = positionAbs;
 }
 
 //  'Play / Pause' event listener
@@ -123,6 +123,9 @@ music.addEventListener('timeupdate', updateProgressBar);
 
 // Progress Bar event listener, change position on click
 progressBarContainer.addEventListener('click', setProgressBar);
+
+// watch for song end event to move to next song
+music.addEventListener('ended', nextSong);
 
 // Next Song
 function nextSong() {
