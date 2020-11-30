@@ -91,6 +91,24 @@ function updateProgressBar(e) {
   songPos.textContent = `${currentMinutes}:${currentSecs}`;
 }
 
+// Move song to position where clicked
+function setProgressBar(e) {
+    console.log(e);
+    // total width of progressBar
+    const width = this.clientWidth
+    /* width from beginning of progress bar, to where
+        element was clicked.
+    */
+    const clickX = e.offsetX
+    // get song duration by destructuring music object
+    const { duration } = music;
+    // calculate postion based on progressBar
+    const positionDecimal = clickX / width;
+    const positionAbs = positionDecimal * duration
+    // set time to clicked postion
+    music.currentTime = positionAbs
+}
+
 //  'Play / Pause' event listener
 playBtn.addEventListener('click', () => (isPlaying ? pauseSong() : playSong()));
 
@@ -102,6 +120,9 @@ nextBtn.addEventListener('click', nextSong);
 
 // Song time event listener
 music.addEventListener('timeupdate', updateProgressBar);
+
+// Progress Bar event listener, change position on click
+progressBarContainer.addEventListener('click', setProgressBar);
 
 // Next Song
 function nextSong() {
